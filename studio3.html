@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+
+<!-- Color wheel is not our code. The js files that are linked or directly in this program relating to the color wheel are not out work. We are simply using
+it as a place holder for one we would want.  -->
+<html>
+
+<head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="custom.css">
+
+
+        <script src="http://code.jquery.com/jquery-2.1.0.min.js" type="text/javascript"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js" type="text/javascript"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/qunit/1.14.0/qunit.min.js" type="text/javascript"></script>
+        <script src="colorwheel.js" type="text/javascript"></script>
+
+</head>
+<script type='text/javascript'>
+        function run_tests() {
+
+                function input_example() {
+                        var cw = Raphael.colorwheel($("#test .colorwheel")[0], 300);
+                        cw.input($("#test input")[0]);
+                        return cw;
+                }
+
+                function callback_example() {
+                        var cw = Raphael.colorwheel($("#test .colorwheel")[0], 150);
+                        cw.input($("#test input")[0]);
+                        return cw;
+                }
+
+                module("Color Wheel");
+
+                var input = $("#test input");
+                var cw = input_example();
+
+                test("setting the color value updates the picker and the input", function() {
+                        cw.color("#FF0000");
+                        equal("#ff0000", cw.color().hex, "the color value is set");
+                        equal("#ff0000", input.val(), "input is set");
+                });
+
+                module("Callback");
+
+                test("onchange should happen when user interaction happens", function() {
+                        var onchange_count = 0;
+                        cw.onchange(function() {
+                                onchange_count += 1;
+                        });
+                        equal(onchange_count, 0, "onchange has not triggered yet");
+                        input.val("#FFFFFF").trigger("keyup");
+                        equal(onchange_count, 1, "onchange should trigger when input changed");
+                });
+
+        }
+
+        $(run_tests);
+</script>
+
+<body>
+
+
+        <div class="row">
+                <div class="col-md-4">
+                        <img id="button" src="on.png">
+                </div>
+                <div class="col-md-4">
+                        <div class="btn-group page-toggle">
+                                <button type="button" class="btn btn-primary">Color</button>
+                                <button type="button" class="btn btn-primary">Patterns (premium)🔒</button>
+                                <button type="button" class="btn btn-primary"><a href="connect.html">Connect</a></button>
+                        </div>
+                        <div id='test'>
+                                <div class='colorwheel' >
+                                <input id='test_input' type='text' />
+                        </div>
+                        <br /><br /><p>
+                                Brightness
+                        </p><input type="range" />
+
+                </div>
+                <div class="col-md-4">
+
+                </div>
+        </div>
+
+
+</body>
+<script>
+counter = true;
+document.getElementById("button").addEventListener("click", function() {
+
+        if (counter == true){
+                counter = false;
+                document.getElementById("button").src = "off.png";
+        }
+        else {
+                counter = true;
+                document.getElementById("button").src = "on.png";
+        }
+
+});
+
+
+</script>
+
+
+</html>
