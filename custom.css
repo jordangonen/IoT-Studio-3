@@ -13,3 +13,10 @@ a {
         color: #FFFFFF;
    text-decoration: none;
 }
+.pad {
+  padding-top: 20%;
+  margin-left: 20%;
+}
+#power {
+  font-size: 8em;
+}

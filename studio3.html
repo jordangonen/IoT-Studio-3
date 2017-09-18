@@ -5,6 +5,7 @@ it as a place holder for one we would want.  -->
 <html>
 
 <head>
+        <!-- <link rel="stylehseet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" > -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="custom.css">
 
@@ -12,7 +13,11 @@ it as a place holder for one we would want.  -->
         <script src="http://code.jquery.com/jquery-2.1.0.min.js" type="text/javascript"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js" type="text/javascript"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/qunit/1.14.0/qunit.min.js" type="text/javascript"></script>
+        <script src="https://use.fontawesome.com/fd16eb518a.js"></script>
+
+
         <script src="colorwheel.js" type="text/javascript"></script>
+
 
 </head>
 <script type='text/javascript'>
@@ -60,7 +65,7 @@ it as a place holder for one we would want.  -->
 
 <body>
 
-
+<i class="fa fa-lightbulb-o" aria-hidden="true"></i>
         <div class="row">
                 <div class="col-md-4">
                         <img id="button" src="on.png">
@@ -77,31 +82,43 @@ it as a place holder for one we would want.  -->
                         </div>
                         <br /><br /><p>
                                 Brightness
+
                         </p><input type="range" />
 
                 </div>
-                <div class="col-md-4">
-
+                <div class="col-md-4 pad">
+                  <div>
+                    <i id="power" class="fa fa-lightbulb-o" aria-hidden="true"></i>
+                  </div>
                 </div>
-        </div>
+            </div>
+
 
 
 </body>
 <script>
 counter = true;
+color = "";
+function getColor() {
+  color = document.getElementById("test_input").value;
+}
+
 document.getElementById("button").addEventListener("click", function() {
 
         if (counter == true){
                 counter = false;
                 document.getElementById("button").src = "off.png";
+                getColor();
+                document.getElementById("power").style.color = color;
         }
         else {
                 counter = true;
                 document.getElementById("button").src = "on.png";
         }
 
-});
 
+
+});
 
 </script>
 
